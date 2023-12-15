@@ -24,6 +24,7 @@
         run_job_template:
           name: "Demo Job Template"
           organization: "Default"
+          inventory: "Demo Inventory"
           # job_args:
           #   extra_vars:
           #     vm_name: "{{ event.alert.labels.job }}"
