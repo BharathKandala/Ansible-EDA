@@ -1,0 +1,28 @@
+---
+- name: Deploy Remediation
+  hosts: localhost
+  sources:
+    - name: listen for alerts
+      ansible.eda.url_check:
+        urls: 
+          - http://google.com
+          - http://52.116.203.66/hello.html
+          - https://github.com/ansible/event-driven-ansible
+ #         - https://52.118.208.158:80
+        delay: 10
+
+  rules:
+
+    - name: Up server URL
+      condition: event.url_check.status == "up"
+      action:
+        echo:
+          message: "{{ event.url_check.url }} is up, Nothing to do!!" 
+
+    - name: Down server URL
+      condition: event.url_check.status == "down"
+      action:
+        run_playbook:
+          name: remediation_down.yml
+#          set_facts: true
+

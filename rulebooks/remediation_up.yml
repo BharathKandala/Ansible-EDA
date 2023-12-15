@@ -1,0 +1,9 @@
+---
+- name: demom
+  hosts: localhost
+
+  tasks:
+
+  - name: URL status
+    debug: 
+      msg: "URL is Running"
