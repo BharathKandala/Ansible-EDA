@@ -1,9 +1,0 @@
----
-- name: demom
-  hosts: all
-
-  tasks:
-
-  - name: demo
-    debug: 
-      msg: "From Remediation"
