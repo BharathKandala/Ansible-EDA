@@ -1,6 +1,6 @@
 ---
 - name: Automatic Remediation from Alert Manager
-  hosts: all
+  hosts: localhost
   execution_strategy: parallel
   sources:
     - name: Listen for alerts from Alert Manager
