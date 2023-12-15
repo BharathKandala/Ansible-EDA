@@ -1,0 +1,29 @@
+---
+- name: Automatic Remediation from Alert Manager
+  hosts: all
+  execution_strategy: parallel
+  sources:
+    - name: Listen for alerts from Alert Manager
+      ansible.eda.alertmanager:
+        host: 0.0.0.0
+        port: 8000
+  rules:
+    # - name: Prometheus Node Exporter Down
+    #   condition: event.alert.labels.alertname == "ExporterDown" and event.alert.status == "firing" and event.alert.labels.job != "tower metrics"
+    #   action:
+    #     run_workflow_template:
+    #       name: "Automated Response Node Exporter Down EDA"
+    #       organization: "Security"
+    #       job_args:
+    #         extra_vars:
+    #           vm_name: "{{ event.alert.labels.job }}"
+
+    - name: SELinux Disabled
+      condition: event.alert.labels.alertname == "SELinuxDisabled" and event.alert.status == "firing"
+      action:
+        run_job_template:
+          name: "Demo Job Template"
+          organization: "Default"
+          # job_args:
+          #   extra_vars:
+          #     vm_name: "{{ event.alert.labels.job }}"
