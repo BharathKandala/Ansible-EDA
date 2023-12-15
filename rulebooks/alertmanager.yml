@@ -1,6 +1,6 @@
 ---
 - name: Automatic Remediation from Alert Manager
-  hosts: localhost
+  hosts: all
   execution_strategy: parallel
   sources:
     - name: Listen for alerts from Alert Manager
@@ -19,12 +19,12 @@
     #           vm_name: "{{ event.alert.labels.job }}"
 
     - name: SELinux Disabled
-      condition: event.alert.labels.alertname == "SELinuxDisabled" and event.alert.status == "firing"
+      # condition: event.alert.labels.alertname == "SELinuxDisabled" and event.alert.status == "firing"
       action:
         run_job_template:
-          name: "Demo Job Template"
+          name: "Log Monitoring Auto Remediation"
           organization: "Default"
-          inventory: "Demo Inventory"
+          inventory: "Oracle Inventory"
           # job_args:
           #   extra_vars:
           #     vm_name: "{{ event.alert.labels.job }}"
